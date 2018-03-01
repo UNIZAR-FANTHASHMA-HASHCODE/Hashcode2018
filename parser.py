@@ -10,4 +10,6 @@ def getInput(input_file):
 	headers = headers.split(' ')
 	for element in grid:
 		grids.append(element.split(' '))
+
+	grids.sort(key=lambda x: x[4])
 	return (headers,grids)
