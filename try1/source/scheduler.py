@@ -17,10 +17,11 @@ def stepScore(xCar,yCar,xStart,yStart,xEnd,yEnd,t,tStart,bonus):
     distStartEnd = abs(xEnd - xStart) + abs(yEnd - yStart)
 
     tEspera = tStart - (t + distCarStart)
-    if tEspera < 0:
+    if tEspera <= 0:
         tEspera = 0
+        return distCarStart + tEspera - distStartEnd - bonus
 
-    return distCarStart + tEspera - distStartEnd - bonus
+    return distCarStart + tEspera - distStartEnd
 
 # Funcion que devuelve el tiempo a sumar al tiempo actual
 def newTime(xCar,yCar,xStart,yStart,xEnd,yEnd,t,tStart):
@@ -35,21 +36,23 @@ def newTime(xCar,yCar,xStart,yStart,xEnd,yEnd,t,tStart):
 
 # MAIN
 if __name__ == "__main__" :
-    parsed = getInput("a_example.in")
+    parsed = getInput("e_high_bonus.in")
 
     schedule = []
     position = []
 
-    pprint(parsed)
     # Inicializar schedule
     for x in range(parsed[0][2]):
         schedule.append([])
 
     # Incializar coordenadas a 0,0 y T de cada vehiculo a 0
     for x in range(parsed[0][2]):
-        position.append((0,0,0))
+        position.append([0,0,0])
 
-    while parsed[1]:    # Mientras queden viajes disponibles
+    notSelected = True
+
+    while parsed[1] and notSelected:    # Mientras queden viajes disponibles
+        notSelected = False
         for vehicle in range(parsed[0][2]):     # Para cada vehiculo
             auxRide = None
             auxTime = None
@@ -64,11 +67,13 @@ if __name__ == "__main__" :
                             auxRide = ride
                             auxTime = currentTime
 
-            schedule[vehicle].append[auxRide[6]]
-            position[vehicle][0] = auxRide[2]
-            position[vehicle][1] = auxRide[3]
-            position[vehicle][2] += newTime(position[vehicle][0], position[vehicle][1],auxRide[0], auxRide[1], auxRide[2], auxRide[3], position[vehicle][2], auxRide[4])
+            if auxRide != None:
+                notSelected = True
+                schedule[vehicle].append(auxRide[6])
+                position[vehicle][0] = auxRide[2]
+                position[vehicle][1] = auxRide[3]
+                position[vehicle][2] += newTime(position[vehicle][0], position[vehicle][1],auxRide[0], auxRide[1], auxRide[2], auxRide[3], position[vehicle][2], auxRide[4])
 
-            parsed[1].remove(auxRide)  # Quitamos el viaje de la lista de viajes disponibles
+                parsed[1].remove(auxRide)  # Quitamos el viaje de la lista de viajes disponibles
 
-    writeOutPut(schedule)
+    writeOutput(schedule)
