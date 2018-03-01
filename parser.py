@@ -8,6 +8,14 @@ def getInput(input_file):
 	grid.pop()
 	grids = []
 	headers = headers.split(' ')
+	i=0
 	for element in grid:
-		grids.append(element.split(' '))
+		aux = element.split(' ')
+		aux.append(i)
+		grids.append(aux)
+		i=i+1
+	grids.sort(key=lambda x: x[4])
 	return (headers,grids)
+
+def writeOutput(vehicles):
+	print "gatos"

@@ -1,4 +1,5 @@
-from parser import getInput
+from parserWriter import getInput, writeOutput
+from pprint import pprint
 
 # Calcula si el coche puede realizar ese viaje
 def arriveOnTime(xCar,yCar,xStart,yStart,xEnd,yEnd,t,tEnd):
@@ -39,6 +40,7 @@ if __name__ == "__main__" :
     schedule = []
     position = []
 
+    pprint(parsed)
     # Inicializar schedule
     for x in range(parsed[0][2]):
         schedule.append([])
@@ -67,4 +69,6 @@ if __name__ == "__main__" :
             position[vehicle][1] = auxRide[3]
             position[vehicle][2] += newTime(position[vehicle][0], position[vehicle][1],auxRide[0], auxRide[1], auxRide[2], auxRide[3], position[vehicle][2], auxRide[4])
 
-            parsed[1].pop(auxRide)  # Quitamos el viaje de la lista de viajes disponibles
+            parsed[1].remove(auxRide)  # Quitamos el viaje de la lista de viajes disponibles
+
+    writeOutPut(schedule)
