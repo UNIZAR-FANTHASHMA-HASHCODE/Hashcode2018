@@ -13,9 +13,11 @@ def getInput(input_file):
 	grid.pop()
 	rides = []
 	headers = headers.split(' ')
+	headers = [int(x) for x in headers]
 	i=0
 	for element in grid:
 		aux = element.split(' ')
+		aux = [int(x) for x in aux]
 		aux.append(i)
 		rides.append(aux)
 		i=i+1
