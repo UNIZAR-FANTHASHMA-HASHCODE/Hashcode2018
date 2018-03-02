@@ -8,6 +8,6 @@
 - [Asier Salueña](https://github.com/asierhandball)
 
 ## Resultados: 
-- Posición en el HUB de Zaragoza:
-- Posición en España:
-- Posición mundial: 
+- Posición en el HUB de Zaragoza:5
+- Posición en España:50
+- Posición mundial: 1346
